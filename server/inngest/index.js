@@ -7,7 +7,7 @@ import Story from "../models/Story.js";
 import User from "../models/User.js";
 
 // Create a client to send and receive events
-export const inngest = new Inngest({ id: "pingup-app" });
+export const inngest = new Inngest({ id: "Zynk" });
 
 // Inngest Function to save user data to a database
 const syncUserCreation = inngest.createFunction(
