@@ -7,9 +7,9 @@ import { clerkMiddleware } from '@clerk/express'
 import connectDB from './configs/db.js';
 import {inngest, functions} from './inngest/index.js'
 
-// import messageRouter from './routes/messageRoutes.js';
-// import postRouter from './routes/postRoutes.js';
-// import storyRouter from './routes/storyRoutes.js';
+import messageRouter from './routes/messageRoutes.js';
+import postRouter from './routes/postRoutes.js';
+import storyRouter from './routes/storyRoutes.js';
 import userRouter from './routes/userRoutes.js';
 
 const app = express();
@@ -23,9 +23,9 @@ app.use(clerkMiddleware());
 app.get('/', (req, res)=> res.send('Server is running'))
 app.use('/api/inngest', serve({ client: inngest, functions }))
 app.use('/api/user', userRouter)
-// app.use('/api/post', postRouter)
-// app.use('/api/story', storyRouter)
-// app.use('/api/message', messageRouter)
+app.use('/api/post', postRouter)
+app.use('/api/story', storyRouter)
+app.use('/api/message', messageRouter)
 
 const PORT = process.env.PORT || 4000;
 
