@@ -1,9 +1,10 @@
-import logo from './logo.svg'
-import sample_cover from './sample_cover.jpg'
-import sample_profile from './sample_profile.jpg'
+import { Home, MessageCircle, Search, UserIcon, Users } from 'lucide-react'
+
 import bgImage from './bgImage.png'
 import group_users from './group_users.png'
-import { Home, MessageCircle, Search, UserIcon, Users } from 'lucide-react'
+import logo from './logo14.png'
+import sample_cover from './sample_cover.jpg'
+import sample_profile from './sample_profile.jpg'
 import sponsored_img from './sponsored_img.png'
 
 export const assets = {

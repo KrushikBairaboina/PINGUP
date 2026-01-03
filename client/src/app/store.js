@@ -1,0 +1,12 @@
+import connectionsReducer from '../features/connections/connectionsSlice.js'
+import messagesReducer from '../features/messages/messagesSlice.js'
+import userReducer from '../features/user/userSlice.js'
+import { configureStore } from '@reduxjs/toolkit'
+
+export const store = configureStore({
+    reducer: {
+       user: userReducer,
+       connections: connectionsReducer,
+       messages: messagesReducer
+    }
+})

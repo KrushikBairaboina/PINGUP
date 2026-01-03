@@ -75,7 +75,7 @@ export const updateUserData = async (req, res) => {
             const buffer = fs.readFileSync(cover.path)
             const response = await imagekit.upload({
                 file: buffer,
-                fileName: profile.originalname,
+                fileName: cover.originalname,
             })
 
             const url = imagekit.url({
@@ -287,3 +287,20 @@ export const getUserProfiles = async (req, res) =>{
         res.json({success: false, message: error.message})
     }
 }
+export const getLikedPosts = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const { profileId } = req.body;
+
+    const id = profileId || userId;
+
+    const posts = await Post.find({ likes_count: id })
+      .populate("user")
+      .sort({ createdAt: -1 });
+
+    res.json({ success: true, posts });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};

@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import { Pencil } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import { useDispatch, useSelector } from 'react-redux';
-// import { updateUser } from '../features/user/userSlice';
-// import { useAuth } from '@clerk/clerk-react';
+import { updateUser } from '../features/user/userSlice';
+import { useAuth } from '@clerk/clerk-react';
 import { dummyUserData } from '../assets/assets'
 
 const ProfileModal = ({setShowEdit}) => {
 
+    const dispatch = useDispatch();
+    const {getToken} = useAuth()
 
-    const user = dummyUserData
+    const user = useSelector((state) => state.user.value)
     const [editForm, setEditForm] = useState({
         username: user.username,
         bio: user.bio,
@@ -22,26 +24,26 @@ const ProfileModal = ({setShowEdit}) => {
 
     const handleSaveProfile = async (e) => {
         e.preventDefault();
-    //     try {
+        try {
 
-    //         const userData = new FormData();
-    //         const {full_name, username, bio, location, profile_picture, cover_photo} = editForm
+            const userData = new FormData();
+            const {full_name, username, bio, location, profile_picture, cover_photo} = editForm
 
-    //         userData.append('username', username);
-    //         userData.append('bio', bio);
-    //         userData.append('location', location);
-    //         userData.append('full_name', full_name);
-    //         profile_picture && userData.append('profile', profile_picture)
-    //         cover_photo && userData.append('cover', cover_photo)
+            userData.append('username', username);
+            userData.append('bio', bio);
+            userData.append('location', location);
+            userData.append('full_name', full_name);
+            profile_picture && userData.append('profile', profile_picture)
+            cover_photo && userData.append('cover', cover_photo)
 
-    //         const token = await getToken()
-    //         dispatch(updateUser({userData, token}))
+            const token = await getToken()
+            dispatch(updateUser({userData, token}))
 
-    //         setShowEdit(false)
-    //     } catch (error) {
-    //         toast.error(error.message)
-    //     }
-     }
+            setShowEdit(false)
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
   return (
     <div className='fixed top-0 bottom-0 left-0 right-0 z-110 h-screen overflow-y-scroll bg-black/50'>
